@@ -1,6 +1,6 @@
 <template>
   <div id="home">
-    <b-container class="bg-danger">
+    <b-container>
       <Navbar></Navbar>
       <GetImages></GetImages>
     </b-container>
@@ -19,14 +19,3 @@ export default {
   },
 };
 </script>
-
-<style>
-#home {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  /* margin-top: 60px; */
-}
-</style>

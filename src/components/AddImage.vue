@@ -1,7 +1,6 @@
 <template>
   <div id="addimage">
-    <b-button v-b-modal.modal-1><font-awesome-icon :icon="myIcon"/></b-button>
-
+    <a v-b-modal.modal-1 class="icon"><font-awesome-icon :icon="myIcon"/></a>
     <b-modal id="modal-1" title="Agrega una Imagen" hide-footer>
       <img :src="image" id="image" alt="tu imagen" />
       <b-form-group>
@@ -57,5 +56,14 @@ export default {
   margin-bottom: 1em;
   width: 100%;
   height: 300px;
+}
+
+.icon {
+  color: #ccc;
+  font-size: 4.5em;
+}
+
+.icon:hover {
+  color: #212429;
 }
 </style>
