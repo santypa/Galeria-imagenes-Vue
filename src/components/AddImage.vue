@@ -4,20 +4,14 @@
 
     <b-modal id="modal-1" title="Agrega una Imagen" hide-footer>
       <img :src="image" id="image" alt="tu imagen" />
-      <form @submit="onSubmit">
-        <b-form-group>
-          <b-form-file
-            type="file"
-            ref="input_img"
-            v-model="form.file"
-            @change="previewFiles"
-            multiple
-            tabindex="-1"
-            accept="image/jpeg, image/png, image/jpg, image/gif"
-          ></b-form-file>
-        </b-form-group>
-        <b-button type="submit" variant="primary">Subir</b-button>
-      </form>
+      <b-form-group>
+        <b-form-file
+          type="file"
+          @change="previewFiles"
+          accept="image/jpeg, image/png, image/jpg, image/gif"
+        ></b-form-file>
+      </b-form-group>
+      <b-button @click="onSubir" variant="primary">Subir</b-button>
     </b-modal>
   </div>
 </template>
@@ -25,14 +19,13 @@
 <script>
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
 export default {
   name: "AddImage",
   data() {
     return {
       myIcon: faPlus,
-      form: {
-        file: "",
-      },
+      fileImage: null,
       image: "https://via.placeholder.com/150",
     };
   },
@@ -41,12 +34,19 @@ export default {
   },
   methods: {
     previewFiles(e) {
-      const file = e.target.files[0];
-      this.image = URL.createObjectURL(file);
+      this.image = URL.createObjectURL(e.target.files[0]);
+      this.fileImage = e.target.files[0];
     },
-    onSubmit(e) {
+    onSubir(e) {
       e.preventDefault();
-      console.log(this.form.file);
+      const fd = new FormData();
+      fd.append("url", this.fileImage, this.fileImage.name);
+      fetch("https://api.jeisontech.dev/api/images/", {
+        method: "POST",
+        body: fd,
+      }).then((res) => {
+        console.log(res);
+      });
     },
   },
 };
