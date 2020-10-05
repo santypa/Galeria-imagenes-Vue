@@ -88,5 +88,6 @@ export default {
 .btn-secondary {
   background: #3fb27f !important;
   border-color: #3fb27f !important;
+  margin-bottom: 2em;
 }
 </style>

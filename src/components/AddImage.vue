@@ -3,14 +3,26 @@
     <a v-b-modal.modal-1 class="icon"><font-awesome-icon :icon="myIcon"/></a>
     <b-modal id="modal-1" title="Agrega una Imagen" hide-footer>
       <img :src="image" id="image" alt="tu imagen" />
-      <b-form-group>
-        <b-form-file
-          type="file"
-          @change="previewFiles"
-          accept="image/jpeg, image/png, image/jpg, image/gif"
-        ></b-form-file>
-      </b-form-group>
-      <b-button @click="onSubir" variant="primary">Subir</b-button>
+      <form>
+        <b-form-group>
+          <b-form-file
+            type="file"
+            v-model="file"
+            @change="previewFiles"
+            accept="image/jpeg, image/png, image/jpg, image/gif"
+          ></b-form-file>
+        </b-form-group>
+        <b-button
+          type="submit"
+          class="btn-subir"
+          @click="onSubir"
+          variant="primary"
+          >Subir</b-button
+        >
+        <b-button type="submit" @change="onSubir" variant="success"
+          >Mostrar imagenes</b-button
+        >
+      </form>
     </b-modal>
   </div>
 </template>
@@ -42,10 +54,26 @@ export default {
       fd.append("url", this.fileImage, this.fileImage.name);
       fetch("https://api.jeisontech.dev/api/images/", {
         method: "POST",
+        mode: "no-cors",
+        headers: { "Access-Control-Allow-Origin": "*" },
         body: fd,
-      }).then((res) => {
-        console.log(res);
-      });
+      })
+        .then((res) => {
+          console.log(res);
+          this.$swal(
+            "Se agrego una imagen",
+            "La imagen se agrego correctamente",
+            "success"
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+          this.$swal(
+            "No se agrego tu imagen",
+            "hubo un error al intentar guardar tu imagen",
+            "error"
+          );
+        });
     },
   },
 };
@@ -65,5 +93,8 @@ export default {
 
 .icon:hover {
   color: #212429;
+}
+.btn-subir {
+  margin-right: 1em;
 }
 </style>
