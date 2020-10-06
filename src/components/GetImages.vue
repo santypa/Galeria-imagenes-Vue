@@ -1,6 +1,6 @@
 <template>
   <div id="getimages" class="row">
-    <b-modal id="getimages" title="Agrega una Imagen" hide-footer> </b-modal>
+    <!-- <b-modal id="getimages" title="Agrega una Imagen" hide-footer> </b-modal> -->
     <b-col
       sm="12"
       md="6"
@@ -14,9 +14,9 @@
       v-for="imagen in order(imagenes)"
       :key="imagen.id"
     >
-      <a v-b-modal.getimages>
-        <img id="imagenes-api" :src="imagen.url" alt="" />
-      </a>
+      <!-- <a v-b-modal.getimages> -->
+      <img id="imagenes-api" :src="imagen.url" alt="" />
+      <!-- </a> -->
     </div>
 
     <!-- Using value -->
@@ -32,9 +32,9 @@
           v-for="imagen in orderMax(imagenes)"
           :key="imagen.id"
         >
-          <a v-b-modal.getimages>
-            <img id="imagenes-api" :src="imagen.url" alt="" />
-          </a>
+          <!-- <a v-b-modal.getimages> -->
+          <img id="imagenes-api" :src="imagen.url" alt="" />
+          <!-- </a> -->
         </b-collapse>
       </b-row>
     </b-container>
